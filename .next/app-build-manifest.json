@@ -1,9 +1,9 @@
 {
   "pages": {
-    "/page": [
+    "/form/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/form/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
@@ -21,10 +21,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/guide/page.js"
     ],
-    "/form/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/form/page.js"
+      "static/chunks/app/page.js"
     ],
     "/complete/page": [
       "static/chunks/webpack.js",
