@@ -179,11 +179,20 @@ function getRecommendedCards(userPreferences) {
   const sortedCards = sortAndTierCards(scoredCards);
   return { sortedCards, poor }; // Return poor flag as well
 }
+//adds the directory
+function pngMaker(name){
+  let directory = "./src/images"
+  directory += name;
+  directory += ".png";
+
+  return directory;
+}
 
 // Function to get final recommended cards
 function finalCards(userInput) {
   const { sortedCards: recommendedCards, poor } = getRecommendedCards(userInput);
   const returnCard = [];
+  const nameCards = [];
   const cardCategories = userInput.topCategories.map(category => category.toLowerCase());
   let index = 1;
 
@@ -198,40 +207,59 @@ function finalCards(userInput) {
     const card3 = sortByCategoryAndTier(recommendedCards, category, 2 + index);
     if (card1 === null){
       returnCard.push("N/A");
+      nameCards.push("N/A");
     }else{
+      nameCards.push(pngMaker(card1.Name));
       returnCard.push(card1);
     }
 
     if (card2 === null){
       returnCard.push("N/A");
+      nameCards.push("N/A");
     }else{
       returnCard.push(card2);
+      nameCards.push(pngMaker(card2.Name));
     }
 
     if (card3 === null){
       returnCard.push("N/A");
+      nameCards.push("N/A");
     }else{
       returnCard.push(card3);
+      nameCards.push(pngMaker(card3.Name));
     }
   }
 
   const cardM = sortByCategoryAndTier(recommendedCards, "Catch All", 1);
-  if (cardM) returnCard.push(cardM);
+  if (cardM){
+    returnCard.push(cardM);
+    nameCards.push(pngMaker(cardM.Name));
+  } 
 
   if (userInput.interestedInHotelCards === "yes") {
     const card = sortByCategoryAndTier(recommendedCards, "Hotel", 1);
-    if (card) returnCard.push(card);
+    if(card){
+      returnCard.push(card);
+      nameCards.push(pngMaker(card.Name));
+    }  
   }else{
     returnCard.push("N/A");
+    nameCards.push("N/A");
   }
   if (userInput.interestedInAirlineCards === "yes") {
     const card = sortByCategoryAndTier(recommendedCards, "Airline", 1);
-    if (card) returnCard.push(card);
+    if (card){
+      returnCard.push(card);
+      nameCards.push(pngMaker(card.Name));
+    } 
   }
   else{
     returnCard.push("N/A");
+    nameCards.push("N/A");
   }
 
+
+  returnCard.push(nameCards);
   return returnCard;
 }
 
